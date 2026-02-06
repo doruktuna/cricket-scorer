@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 48 48"
+   fill="none"
+   version="1.1"
+   id="svg2"
+   sodipodi:docname="redo.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="namedview2"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.51265242"
+     inkscape:cx="288.69463"
+     inkscape:cy="522.77136"
+     inkscape:window-width="2560"
+     inkscape:window-height="1371"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <rect
+     width="48"
+     height="48"
+     fill="white"
+     fill-opacity="0.01"
+     id="rect1" />
+  <g
+     id="g2"
+     transform="matrix(-1,0,0,1,48,0)">
+    <path
+       d="M 11.2721,36.7279 C 14.5294,39.9853 19.0294,42 24,42 33.9411,42 42,33.9411 42,24 42,14.0589 33.9411,6 24,6 19.0294,6 14.5294,8.01472 11.2721,11.2721 9.61407,12.9301 6,17 6,17"
+       stroke="currentColor"
+       stroke-width="4"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path1" />
+    <path
+       d="m 6,9 v 8 h 8"
+       stroke="currentColor"
+       stroke-width="4"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       id="path2" />
+  </g>
+</svg>

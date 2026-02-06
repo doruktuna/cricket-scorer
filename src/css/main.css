@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+html,
+body {
+  @apply h-full w-screen bg-gray-100;
+}
+
+#app {
+  @apply min-h-screen min-w-screen bg-gray-100;
+}
+
+.btn-sm,
+.btn {
+  @apply rounded p-2;
+
+  &:enabled {
+    @apply cursor-pointer hover:scale-105 hover:shadow shadow-black/40 transition-all duration-300;
+  }
+}
+
+.btn-sm {
+  @apply text-sm px-2 py-1;
+}
+
+.btn-sm:disabled,
+.btn:disabled,
+button:disabled {
+  @apply cursor-not-allowed;
+}
+
+.score-table {
+  @apply border-collapse;
+
+  th,
+  td {
+    @apply py-1 px-2 md:py-2 md:px-4 text-center;
+  }
+
+  td:not(:last-child),
+  th:not(:last-child) {
+    @apply border-r;
+  }
+
+  th,
+  tr:not(:last-child) td {
+    @apply border-b;
+  }
+
+  .player-th {
+    @apply min-w-16 md:min-w-24;
+  }
+
+  .player-name,
+  .number-td,
+  .score-td {
+    @apply md:text-xl font-bold;
+  }
+
+  .score-td .winner-score {
+    @apply text-green-600;
+  }
+}
+
+.shot-btn {
+  @apply min-w-16 font-bold;
+}
