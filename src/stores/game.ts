@@ -86,6 +86,11 @@ export const useGameStore = defineStore("game", {
       const minScore = Math.min(...this.present.players.map((p) => p.score));
       return this.present.players.filter((p) => p.score === minScore);
     },
+
+    isAllClosedNumber: (s) => {
+      return (cn: CricketNumber) =>
+        s.present.players.every((p) => p.hits[cn] >= 3);
+    },
   },
   actions: {
     /* ---------- CORE COMMIT LOGIC  ---------- */

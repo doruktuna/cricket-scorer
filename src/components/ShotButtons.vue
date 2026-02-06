@@ -15,6 +15,7 @@ const gameStore = useGameStore();
         <button
           @click="gameStore.shotMade(25)"
           class="btn shot-btn bg-blue-600 text-white"
+          :disabled="gameStore.isAllClosedNumber(cn)"
         >
           BULL
         </button>
@@ -22,6 +23,7 @@ const gameStore = useGameStore();
         <button
           @click="gameStore.shotMade(25, 2)"
           class="btn shot-btn bg-green-600 text-white"
+          :disabled="gameStore.isAllClosedNumber(cn)"
         >
           BE
         </button>
@@ -31,6 +33,7 @@ const gameStore = useGameStore();
         <button
           @click="gameStore.shotMade(cn)"
           class="btn shot-btn bg-blue-600 text-white"
+          :disabled="gameStore.isAllClosedNumber(cn)"
         >
           {{ cn }}
         </button>
@@ -38,6 +41,7 @@ const gameStore = useGameStore();
         <button
           @click="gameStore.shotMade(cn, 2)"
           class="btn shot-btn bg-green-600 text-white"
+          :disabled="gameStore.isAllClosedNumber(cn)"
         >
           D{{ cn }}
         </button>
@@ -45,6 +49,7 @@ const gameStore = useGameStore();
         <button
           @click="gameStore.shotMade(cn, 3)"
           class="btn shot-btn bg-purple-600 text-white"
+          :disabled="gameStore.isAllClosedNumber(cn)"
         >
           T{{ cn }}
         </button>

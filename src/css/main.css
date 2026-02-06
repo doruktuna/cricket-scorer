@@ -62,5 +62,5 @@ button:disabled {
 }
 
 .shot-btn {
-  @apply min-w-16 font-bold;
+  @apply min-w-16 font-bold transition-opacity duration-200 disabled:opacity-30;
 }

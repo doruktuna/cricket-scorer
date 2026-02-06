@@ -4,6 +4,7 @@ import { useGameStore } from "@/stores/game";
 import { computed } from "vue";
 import PlayerTH from "./PlayerTH.vue";
 import ShotTD from "./ShotTD.vue";
+import XMarkIcon from "@/assets/icons/x-mark.svg";
 
 const gameStore = useGameStore();
 const leftPlayers = computed(() => {
@@ -55,7 +56,20 @@ const rightPlayers = computed(() => {
           :amount="p.hits[cn]"
         />
 
-        <td class="number-td">{{ cn == 25 ? "BE" : cn }}</td>
+        <td class="number-td">
+          <div class="relative">
+            <span
+              class="absolute inset-0 flex items-center justify-center text-black transition-opacity duration-200 opacity-0"
+              :class="{ 'opacity-100': gameStore.isAllClosedNumber(cn) }"
+            >
+              <XMarkIcon class="w-24 h-24" />
+            </span>
+
+            <span :class="{ 'text-gray-400': gameStore.isAllClosedNumber(cn) }">
+              {{ cn == 25 ? "BE" : cn }}
+            </span>
+          </div>
+        </td>
 
         <ShotTD
           v-for="p in rightPlayers"
