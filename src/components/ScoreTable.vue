@@ -26,9 +26,10 @@ const rightPlayers = computed(() => {
           :key="p.id"
           :name="p.name"
           :is-current-player="
-            p.id == gameStore.currentPlayerInd && !gameStore.isFinished
+            p.id == gameStore.present.currentPlayerInd &&
+            !gameStore.present.isFinished
           "
-          :shots-left="gameStore.currentPlayerShotsLeft"
+          :shots-left="gameStore.present.currentPlayerShotsLeft"
         />
 
         <th></th>
@@ -38,9 +39,10 @@ const rightPlayers = computed(() => {
           :key="p.id"
           :name="p.name"
           :is-current-player="
-            p.id == gameStore.currentPlayerInd && !gameStore.isFinished
+            p.id == gameStore.present.currentPlayerInd &&
+            !gameStore.present.isFinished
           "
-          :shots-left="gameStore.currentPlayerShotsLeft"
+          :shots-left="gameStore.present.currentPlayerShotsLeft"
         />
       </tr>
     </thead>

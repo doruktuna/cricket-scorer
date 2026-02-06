@@ -16,11 +16,3 @@ app.mount("#app");
 // For saving and hydrating gameState
 const gameStore = useGameStore();
 gameStore.hydrate();
-
-watch(
-  () => gameStore.$state,
-  (state) => {
-    localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(state));
-  },
-  { deep: true },
-);

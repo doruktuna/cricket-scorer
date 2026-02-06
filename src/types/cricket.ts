@@ -16,8 +16,7 @@ export interface Player {
 
 export interface ShotAction {
   type: ShotActionType;
-  player: Player;
-  shotsLeftBeforeShot: number;
+  playerId: number;
   cricketNumber?: CricketNumber;
   amount?: number;
 }
@@ -30,6 +29,5 @@ export interface GameState {
   maxRounds: number;
   isStarted: boolean;
   isFinished: boolean;
-  shotActions: ShotAction[];
-  shotActionsInd: number;
+  lastAction: ShotAction | null;
 }

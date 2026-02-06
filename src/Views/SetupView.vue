@@ -17,7 +17,7 @@ function startGame() {
     alert("Players can't have empty names!");
     return;
   }
-  gameStore.isStarted = true;
+  gameStore.startGame();
   router.replace({ name: "game" });
 }
 </script>

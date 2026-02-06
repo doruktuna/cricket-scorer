@@ -15,7 +15,7 @@ const gameStore = useGameStore();
       class="grid grid-cols-[auto_auto] items-center gap-x-2 gap-y-1 text-xl"
     >
       <i-heroicons-arrow-path class="w-6 h-6 text-black" />
-      <span>{{ gameStore.roundNo }} /25</span>
+      <span>{{ gameStore.present.roundNo }} /25</span>
 
       <i-heroicons-user class="w-6 h-6 text-black" />
       <span>{{ gameStore.currentPlayer?.name ?? "" }}</span>
@@ -29,7 +29,7 @@ const gameStore = useGameStore();
 
     <div class="flex gap-2 mt-2">
       <button
-        @click="gameStore.undoAction"
+        @click="gameStore.undo"
         class="btn bg-blue-600 text-white disabled:bg-blue-200"
         :disabled="!gameStore.isUndoAvailable"
       >
@@ -37,7 +37,7 @@ const gameStore = useGameStore();
       </button>
 
       <button
-        @click="gameStore.redoAction"
+        @click="gameStore.redo"
         class="btn bg-green-600 text-white disabled:bg-green-200"
         :disabled="!gameStore.isRedoAvailable"
       >
