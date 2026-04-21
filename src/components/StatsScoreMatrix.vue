@@ -13,18 +13,30 @@ const gameStore = useGameStore();
       <thead>
         <tr>
           <th></th>
-          <th v-for="p in gameStore.present.players">{{ p.name }}</th>
+          <th
+            class="text-xl"
+            v-for="p in gameStore.present.players"
+          >
+            {{ p.name }}
+          </th>
         </tr>
       </thead>
 
       <tbody>
         <tr v-for="scorerP in gameStore.present.players">
-          <td class="font-bold">{{ scorerP.name }}</td>
+          <td class="font-bold text-xl">{{ scorerP.name }}</td>
           <td v-for="otherP in gameStore.present.players">
-            <div>
+            <div
+              class="text-xl"
+              v-if="scorerP.id != otherP.id"
+            >
               {{ gameStore.inflictedTotalScore(scorerP.id, otherP.id) }}
             </div>
-            <div class="w-full flex justify-center">
+
+            <div
+              class="w-full flex justify-center"
+              v-if="scorerP.id != otherP.id"
+            >
               <div class="max-w-36">
                 {{ gameStore.inflictedScoresStr(scorerP.id, otherP.id) }}
               </div>

@@ -13,7 +13,9 @@ const gameStore = useGameStore();
 
 <template>
   <div class="absolute top-0 left-0 h-screen w-screen bg-black/70">
-    <div class="bg-gray-200 mt-32 mx-auto w-fit p-6 pr-12 relative">
+    <div
+      class="bg-gray-200 mt-16 rounded-2xl mx-auto w-fit p-6 pr-12 relative overflow-x-auto max-h-[90%]"
+    >
       <div class="flex gap-6 justify-center">
         <button
           class="bg-green-600 rounded-lg font-bold text-white p-2 cursor-pointer hover:scale-105"

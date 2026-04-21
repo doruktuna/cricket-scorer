@@ -4,6 +4,8 @@ import CupStar from "@/assets/icons/cup-star.svg";
 import { computed } from "vue";
 import router from "@/router";
 
+defineEmits(["showStats"]);
+
 const gameStore = useGameStore();
 
 function newGame() {
@@ -16,7 +18,7 @@ function newGame() {
   <div
     class="bg-gray-300 border-2 border-orange-600 p-4 flex flex-col items-stretch h-fit gap-2"
   >
-    <p class="bg-blue-600 text-white font-bold p-2 rounded-sm">GAME FINISHED</p>
+    <p class="bg-gray-600 text-white font-bold p-2 rounded-sm">GAME FINISHED</p>
 
     <div
       class="bg-purple-600 text-white font-bold p-2 rounded-sm flex flex-col items-center gap-2"
@@ -29,6 +31,13 @@ function newGame() {
         {{ p.name }}
       </p>
     </div>
+
+    <button
+      @click="$emit('showStats')"
+      class="btn bg-blue-600 text-white font-bold"
+    >
+      <p class="text-lg">STATS</p>
+    </button>
 
     <button
       @click="gameStore.restartGame"

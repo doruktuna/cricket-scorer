@@ -8,7 +8,7 @@ import StatsOverlay from "@/components/StatsOverlay.vue";
 import { useGameStore } from "@/stores/game";
 import { ref } from "vue";
 
-const showStats = ref(true);
+const showStats = ref(false);
 
 const gameStore = useGameStore();
 </script>
@@ -18,7 +18,10 @@ const gameStore = useGameStore();
 
   <div class="flex justify-center flex-wrap gap-12 mt-12">
     <ShotButtons v-if="!gameStore.present.isFinished" />
-    <EndGameCard v-else />
+    <EndGameCard
+      v-else
+      @show-stats="showStats = true"
+    />
 
     <div class="w-fit overflow-auto pb-8 pr-4">
       <ScoreTable />

@@ -14,7 +14,11 @@ const gameStore = useGameStore();
         class="grid grid-cols-[1fr_auto] items-start gap-x-2 gap-y-1 text-xl w-fit"
       >
         <i-heroicons-arrow-path class="w-6 h-6 text-black" />
-        <span>{{ gameStore.present.roundNo }} /25</span>
+        <span
+          >{{ gameStore.present.roundNo }}/{{
+            gameStore.present.maxRounds
+          }}</span
+        >
 
         <i-heroicons-user class="w-6 h-6 text-black" />
         <span>{{ gameStore.currentPlayer?.name ?? "" }}</span>
