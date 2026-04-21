@@ -4,12 +4,15 @@ import SingleShotIcon from "@/assets/icons/single-mark.svg";
 import DoubleShotIcon from "@/assets/icons/x-mark.svg";
 import TripleShotIcon from "@/assets/icons/circle-with-x.svg";
 
-const props = defineProps<{ amount: number }>();
+const props = defineProps<{ amount: number; isClosed: boolean }>();
 </script>
 
 <template>
   <td class="shot-td">
-    <div class="flex justify-center">
+    <div
+      class="flex justify-center"
+      :class="{ 'text-gray-400': isClosed }"
+    >
       <SingleShotIcon
         v-if="amount == 1"
         class="w-8 h-8"
