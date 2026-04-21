@@ -3,6 +3,8 @@ import { useGameStore } from "@/stores/game";
 import DartBoard from "@/assets/icons/dart-board.svg";
 import router from "@/router";
 
+defineEmits(["showStats"]);
+
 const gameStore = useGameStore();
 
 function restartGame() {
@@ -32,6 +34,13 @@ function newGame() {
     </div>
 
     <div class="header-right md:flex-1 flex items-center justify-end gap-3">
+      <button
+        @click="$emit('showStats')"
+        class="btn-sm bg-blue-600 text-white font-bold"
+      >
+        STATS
+      </button>
+
       <button
         @click="restartGame"
         class="btn-sm bg-orange-600 text-white font-bold"

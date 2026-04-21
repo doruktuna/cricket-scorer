@@ -27,6 +27,7 @@ function initialGameState(): GameState {
     isStarted: false,
     isFinished: false,
     lastAction: null,
+    scoreInflicted: [[]],
   };
 }
 
@@ -101,6 +102,32 @@ export const useGameStore = defineStore("game", {
       return (cn: CricketNumber) =>
         s.present.players.every((p) => p.hits[cn] >= 3);
     },
+
+    inflictedTotalScore: (s) => {
+      return (scorerInd: number, pInd: number) => {
+        const vals = Object.entries(
+          s.present.scoreInflicted[scorerInd]![pInd]!,
+        );
+        return vals.reduce(
+          (sum, scoreInfo) => sum + Number(scoreInfo[0]) * scoreInfo[1],
+          0,
+        );
+      };
+    },
+
+    inflictedScoresStr: (s) => {
+      return (scorerInd: number, pInd: number) => {
+        const vals = Object.entries(
+          s.present.scoreInflicted[scorerInd]![pInd]!,
+        );
+
+        return vals
+          .filter((si) => si[1] > 0)
+          .map((si) => `${si[1]}x${si[0]}`)
+          .reverse()
+          .join(", ");
+      };
+    },
   },
   actions: {
     /* ---------- CORE COMMIT LOGIC  ---------- */
@@ -174,6 +201,16 @@ export const useGameStore = defineStore("game", {
       this.present.isStarted = false;
       this.present.isFinished = false;
       this.present.lastAction = null;
+      this.present.scoreInflicted = new Array();
+      this.players.forEach((p) => {
+        const inflictRow = Array.from(
+          { length: this.players.length },
+          (_, i) => {
+            return { ...EMPTY_HITS };
+          },
+        );
+        this.present.scoreInflicted.push(inflictRow);
+      });
       this.past = [];
       this.future = [];
       this.persist();
@@ -284,10 +321,14 @@ export const useGameStore = defineStore("game", {
 
       const excessHits = Math.min(amount, hitsAfterShot - 3);
       const scoreToAdd = excessHits * cricketNumber;
+      const scorerInd = g.currentPlayerInd;
 
       g.players
         .filter((p) => p.hits[cricketNumber] < 3)
-        .forEach((p) => (p.score += scoreToAdd));
+        .forEach((p) => {
+          p.score += scoreToAdd;
+          g.scoreInflicted![scorerInd]![p.id]![cricketNumber] += excessHits;
+        });
     },
 
     setTurnToNextPlayer(g: GameState) {
