@@ -68,10 +68,20 @@ export const useGameStore = defineStore("game", {
     lastAction: (s) => s.present.lastAction,
     nextAction: (s) => (s.future.length == 0 ? null : s.future[0]!.lastAction),
 
-    lastActionString(): string {
-      const prevAction = this.lastAction;
-      const player = this.players.find((p) => p.id === prevAction?.playerId);
-      return actionStr(prevAction, player);
+    previousActionString: (s) => {
+      return (prevNo: number) => {
+        let prevAction: ShotAction | null = null;
+        if (prevNo == 1) {
+          prevAction = s.present.lastAction;
+        } else if (prevNo > 1 && s.past.length > prevNo - 2) {
+          const ind = s.past.length - prevNo + 1;
+          prevAction = s.past[ind]?.lastAction ?? null;
+        }
+        const player = s.present.players.find(
+          (p) => p.id === prevAction?.playerId,
+        );
+        return actionStr(prevAction, player);
+      };
     },
 
     nextActionString(): string {
@@ -163,6 +173,7 @@ export const useGameStore = defineStore("game", {
       this.present.maxRounds = 25;
       this.present.isStarted = false;
       this.present.isFinished = false;
+      this.present.lastAction = null;
       this.past = [];
       this.future = [];
       this.persist();
