@@ -378,6 +378,7 @@ export const useGameStore = defineStore("game", {
       for (const player of g.players) {
         g.scoreHistory[player.id]![g.roundNo - 1] = player.score;
       }
+      console.log("SH", JSON.stringify(g.scoreHistory));
     },
 
     setTurnToNextPlayer(g: GameState) {

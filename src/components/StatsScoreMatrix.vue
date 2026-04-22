@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useGameStore } from "@/stores/game";
 import type { Player } from "@/types/cricket";
-import { ref } from "vue";
-
-const panelToShow = ref("matrix");
 
 const gameStore = useGameStore();
 

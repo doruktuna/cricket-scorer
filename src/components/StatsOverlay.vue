@@ -8,7 +8,7 @@ import StatsScoreGraph from "./StatsScoreGraph.vue";
 
 defineEmits(["hideStats"]);
 
-const panelToShow = ref("graph");
+const panelToShow = ref("matrix");
 
 const gameStore = useGameStore();
 </script>

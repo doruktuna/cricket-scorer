@@ -1,79 +1,83 @@
 <script setup lang="ts">
 import { useGameStore } from "@/stores/game";
-import type { Player } from "@/types/cricket";
-import { ref } from "vue";
+import { Line } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { computed } from "vue";
 
-const panelToShow = ref("matrix");
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
-const gameStore = useGameStore();
+const colors = [
+  "f35b04",
+  "3d348b",
+  "8ac926",
+  "1982c4",
+  "023047",
+  "446332",
+  "7678ed",
+  "ffbe0b",
+];
 
-function totalScore(players: Player[]) {
-  return players.reduce((sum, p) => sum + p.score, 0);
-}
+const gs = useGameStore();
+
+const chartOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      title: { display: true, text: "Score" },
+    },
+  },
+};
+
+const rounds = computed(() =>
+  Array.from({ length: gs.present.roundNo }, (_, i) => `${i + 1}`),
+);
+
+const sh = gs.present.scoreHistory;
+
+const chartData = computed(() => ({
+  labels: rounds.value,
+  datasets: gs.players.map((player) => ({
+    label: player.name,
+    backgroundColor: `#${colors[player.id]}`,
+    borderColor: `#${colors[player.id]}`,
+    data: gs.present.scoreHistory[player.id] || [],
+    tension: 0.1,
+  })),
+}));
 </script>
 
 <template>
   <div class="flex justify-center mt-12 w-full">
-    <table class="score-table">
-      <thead>
-        <tr>
-          <th></th>
-          <th
-            class="text-xl"
-            v-for="p in gameStore.present.players"
-          >
-            {{ p.name }}
-          </th>
-          <th class="text-xl">Total</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr v-for="scorerP in gameStore.present.players">
-          <td class="font-bold text-xl">{{ scorerP.name }}</td>
-
-          <td v-for="otherP in gameStore.present.players">
-            <div
-              class="text-xl"
-              v-if="scorerP.id != otherP.id"
-            >
-              {{ gameStore.inflictedTotalScore(scorerP.id, otherP.id) }}
-            </div>
-
-            <div
-              class="w-full flex justify-center"
-              v-if="scorerP.id != otherP.id"
-            >
-              <div class="max-w-36">
-                {{ gameStore.inflictedScoresStr(scorerP.id, otherP.id) }}
-              </div>
-            </div>
-          </td>
-
-          <td>
-            <div class="text-xl">
-              {{ gameStore.inflictedTotalScoreToAll(scorerP.id) }}
-            </div>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="font-bold text-xl">Score</td>
-
-          <td v-for="player in gameStore.present.players">
-            <div class="text-xl">
-              {{ player.score }}
-            </div>
-          </td>
-
-          <td>
-            <div class="text-xl">
-              {{ totalScore(gameStore.present.players) }}
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="graph-container h-[60vh] w-[80vw]">
+      <Line
+        :data="chartData"
+        :options="chartOptions"
+      />
+    </div>
   </div>
 </template>
 
