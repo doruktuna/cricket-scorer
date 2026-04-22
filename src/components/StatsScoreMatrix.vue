@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import { useGameStore } from "@/stores/game";
+import type { Player } from "@/types/cricket";
 import { ref } from "vue";
 
 const panelToShow = ref("matrix");
 
 const gameStore = useGameStore();
+
+function totalScore(players: Player[]) {
+  return players.reduce((sum, p) => sum + p.score, 0);
+}
 </script>
 
 <template>
@@ -19,12 +24,14 @@ const gameStore = useGameStore();
           >
             {{ p.name }}
           </th>
+          <th class="text-xl">Total</th>
         </tr>
       </thead>
 
       <tbody>
         <tr v-for="scorerP in gameStore.present.players">
           <td class="font-bold text-xl">{{ scorerP.name }}</td>
+
           <td v-for="otherP in gameStore.present.players">
             <div
               class="text-xl"
@@ -40,6 +47,28 @@ const gameStore = useGameStore();
               <div class="max-w-36">
                 {{ gameStore.inflictedScoresStr(scorerP.id, otherP.id) }}
               </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="text-xl">
+              {{ gameStore.inflictedTotalScoreToAll(scorerP.id) }}
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="font-bold text-xl">Score</td>
+
+          <td v-for="player in gameStore.present.players">
+            <div class="text-xl">
+              {{ player.score }}
+            </div>
+          </td>
+
+          <td>
+            <div class="text-xl">
+              {{ totalScore(gameStore.present.players) }}
             </div>
           </td>
         </tr>

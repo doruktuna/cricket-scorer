@@ -51,6 +51,18 @@ function actionStr(
     : `${name}: ${shotStr(action.cricketNumber, action.amount)}`;
 }
 
+function inflictedScoreToOtherPlayer(
+  scorerInd: number,
+  pInd: number,
+  inflictMatrix: Array<Array<Record<CricketNumber, number>>>,
+) {
+  const vals = Object.entries(inflictMatrix[scorerInd]![pInd]!);
+  return vals.reduce(
+    (sum, scoreInfo) => sum + Number(scoreInfo[0]) * scoreInfo[1],
+    0,
+  );
+}
+
 export const useGameStore = defineStore("game", {
   state: () => ({
     past: [] as GameState[],
@@ -106,13 +118,26 @@ export const useGameStore = defineStore("game", {
 
     inflictedTotalScore: (s) => {
       return (scorerInd: number, pInd: number) => {
-        const vals = Object.entries(
-          s.present.scoreInflicted[scorerInd]![pInd]!,
+        return inflictedScoreToOtherPlayer(
+          scorerInd,
+          pInd,
+          s.present.scoreInflicted,
         );
-        return vals.reduce(
-          (sum, scoreInfo) => sum + Number(scoreInfo[0]) * scoreInfo[1],
-          0,
-        );
+      };
+    },
+
+    inflictedTotalScoreToAll: (s) => {
+      return (scorerInd: number) => {
+        let sum = 0;
+        for (const otherP of s.present.players) {
+          sum += inflictedScoreToOtherPlayer(
+            scorerInd,
+            otherP.id,
+            s.present.scoreInflicted,
+          );
+        }
+
+        return sum;
       };
     },
 

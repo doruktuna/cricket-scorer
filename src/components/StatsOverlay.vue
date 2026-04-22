@@ -7,7 +7,7 @@ import StatsShotHistory from "./StatsShotHistory.vue";
 
 defineEmits(["hideStats"]);
 
-const panelToShow = ref("history");
+const panelToShow = ref("matrix");
 
 const gameStore = useGameStore();
 </script>
