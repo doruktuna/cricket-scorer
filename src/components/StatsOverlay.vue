@@ -4,10 +4,11 @@ import { ref } from "vue";
 import StatsScoreMatrix from "./StatsScoreMatrix.vue";
 import CircleXIcon from "@/assets/icons/circle-with-x.svg";
 import StatsShotHistory from "./StatsShotHistory.vue";
+import StatsScoreGraph from "./StatsScoreGraph.vue";
 
 defineEmits(["hideStats"]);
 
-const panelToShow = ref("matrix");
+const panelToShow = ref("graph");
 
 const gameStore = useGameStore();
 </script>
@@ -53,6 +54,7 @@ const gameStore = useGameStore();
 
       <StatsScoreMatrix v-show="panelToShow == 'matrix'" />
       <StatsShotHistory v-show="panelToShow == 'history'" />
+      <StatsScoreGraph v-show="panelToShow == 'graph'" />
     </div>
   </div>
 </template>

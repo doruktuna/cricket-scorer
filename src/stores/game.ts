@@ -29,6 +29,7 @@ function initialGameState(): GameState {
     lastAction: null,
     scoreInflicted: [[]],
     shotHistory: [[[]]],
+    scoreHistory: [[]],
   };
 }
 
@@ -241,6 +242,11 @@ export const useGameStore = defineStore("game", {
         { length: this.players.length },
         () => Array.from({ length: MAX_ROUNDS }, () => [] as string[]),
       );
+      this.present.scoreHistory = Array.from(
+        { length: this.players.length },
+        () => Array.from({ length: MAX_ROUNDS }, () => 0),
+      );
+
       this.past = [];
       this.future = [];
       this.persist();
@@ -364,6 +370,14 @@ export const useGameStore = defineStore("game", {
           p.score += scoreToAdd;
           g.scoreInflicted![scorerInd]![p.id]![cricketNumber] += excessHits;
         });
+
+      this.updateScoreHistory(g);
+    },
+
+    updateScoreHistory(g: GameState) {
+      for (const player of g.players) {
+        g.scoreHistory[player.id]![g.roundNo - 1] = player.score;
+      }
     },
 
     setTurnToNextPlayer(g: GameState) {
@@ -374,6 +388,7 @@ export const useGameStore = defineStore("game", {
         } else {
           g.isFinished = true;
         }
+        this.updateScoreHistory(g);
       } else {
         g.currentPlayerInd++;
       }

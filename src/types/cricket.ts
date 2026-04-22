@@ -32,4 +32,5 @@ export interface GameState {
   lastAction: ShotAction | null;
   scoreInflicted: Array<Array<Record<CricketNumber, number>>>;
   shotHistory: Array<Array<Array<string>>>;
+  scoreHistory: Array<Array<number>>;
 }

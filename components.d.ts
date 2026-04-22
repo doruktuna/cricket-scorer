@@ -27,6 +27,7 @@ declare module 'vue' {
     ShotButtons: typeof import('./src/components/ShotButtons.vue')['default']
     ShotTD: typeof import('./src/components/ShotTD.vue')['default']
     StatsOverlay: typeof import('./src/components/StatsOverlay.vue')['default']
+    StatsScoreGraph: typeof import('./src/components/StatsScoreGraph.vue')['default']
     StatsScoreMatrix: typeof import('./src/components/StatsScoreMatrix.vue')['default']
     StatsShotHistory: typeof import('./src/components/StatsShotHistory.vue')['default']
   }
