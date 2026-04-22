@@ -3,10 +3,11 @@ import { useGameStore } from "@/stores/game";
 import { ref } from "vue";
 import StatsScoreMatrix from "./StatsScoreMatrix.vue";
 import CircleXIcon from "@/assets/icons/circle-with-x.svg";
+import StatsShotHistory from "./StatsShotHistory.vue";
 
 defineEmits(["hideStats"]);
 
-const panelToShow = ref("matrix");
+const panelToShow = ref("history");
 
 const gameStore = useGameStore();
 </script>
@@ -51,6 +52,7 @@ const gameStore = useGameStore();
       </div>
 
       <StatsScoreMatrix v-show="panelToShow == 'matrix'" />
+      <StatsShotHistory v-show="panelToShow == 'history'" />
     </div>
   </div>
 </template>

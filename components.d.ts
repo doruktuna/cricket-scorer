@@ -11,7 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    copy: typeof import('./src/components/StatsOverlay copy.vue')['default']
+    copy: typeof import('./src/components/StatsScoreMatrix copy.vue')['default']
     EndGameCard: typeof import('./src/components/EndGameCard.vue')['default']
     GameHeader: typeof import('./src/components/GameHeader.vue')['default']
     IHeroiconsArrowPath: typeof import('~icons/heroicons/arrow-path')['default']
@@ -28,5 +28,6 @@ declare module 'vue' {
     ShotTD: typeof import('./src/components/ShotTD.vue')['default']
     StatsOverlay: typeof import('./src/components/StatsOverlay.vue')['default']
     StatsScoreMatrix: typeof import('./src/components/StatsScoreMatrix.vue')['default']
+    StatsShotHistory: typeof import('./src/components/StatsShotHistory.vue')['default']
   }
 }

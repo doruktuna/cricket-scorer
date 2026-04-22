@@ -28,6 +28,7 @@ function initialGameState(): GameState {
     isFinished: false,
     lastAction: null,
     scoreInflicted: [[]],
+    shotHistory: [[[]]],
   };
 }
 
@@ -211,6 +212,10 @@ export const useGameStore = defineStore("game", {
         );
         this.present.scoreInflicted.push(inflictRow);
       });
+      this.present.shotHistory = Array.from(
+        { length: this.players.length },
+        () => Array.from({ length: MAX_ROUNDS }, () => [] as string[]),
+      );
       this.past = [];
       this.future = [];
       this.persist();
@@ -279,12 +284,17 @@ export const useGameStore = defineStore("game", {
             amount,
           );
 
+          this.present.shotHistory![this.currentPlayer.id]![
+            this.present.roundNo - 1
+          ]?.push(shotStr(cricketNumber, amount));
+
           g.currentPlayerShotsLeft--;
 
           if (g.currentPlayerShotsLeft <= 0) {
             this.setTurnToNextPlayer(g);
           }
 
+          // TODO: Edge case: A player may close everything but he may not be a winner due to high score
           if (this.isAllClosed(player) && this.winners.length === 1) {
             g.isFinished = true;
           }

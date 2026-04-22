@@ -31,4 +31,5 @@ export interface GameState {
   isFinished: boolean;
   lastAction: ShotAction | null;
   scoreInflicted: Array<Array<Record<CricketNumber, number>>>;
+  shotHistory: Array<Array<Array<string>>>;
 }

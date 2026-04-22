@@ -8,7 +8,7 @@ import StatsOverlay from "@/components/StatsOverlay.vue";
 import { useGameStore } from "@/stores/game";
 import { ref } from "vue";
 
-const showStats = ref(false);
+const showStats = ref(true);
 
 const gameStore = useGameStore();
 </script>
